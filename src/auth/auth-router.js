@@ -2,12 +2,13 @@ const express = require('express')
 const AuthService = require('./auth-service')
 
 const authRouter = express.Router()
-const jsonBodyParser = express.json()
+const bodyParser = express.json()
 
 authRouter
-  .post('/login', jsonBodyParser, (req, res, next) => {
+  .post('/login', bodyParser, (req, res, next) => {
     const { user_name, password } = req.body
     const loginUser = { user_name, password }
+    const knexInstance = req.app.get('db')
 
     for (const [key, value] of Object.entries(loginUser))
       if (value == null)
@@ -15,10 +16,7 @@ authRouter
           error: `Missing '${key}' in request body`
         })
 
-    AuthService.getUserWithUserName(
-      req.app.get('db'),
-      loginUser.user_name
-    )
+    AuthService.getUserWithUserName(knexInstance,loginUser.user_name)
       .then(dbUser => {
         if (!dbUser)
           return res.status(400).json({
@@ -33,13 +31,22 @@ authRouter
               })
 
             const sub = dbUser.user_name
-            const payload = { user_id: dbUser.id }
+            const payload = { user_name: sub }
             res.send({
-              authToken: AuthService.createJwt(sub, payload),
+              authToken: AuthService.createJwt(sub, payload), //token gets sent to client side
             })
           })
       })
       .catch(next)
   })
+
+authRouter
+  .route('/current-user')
+  .get(requireAuth, (req,res,next) => {
+    const user = req.user
+    const knexInstance = req.app.get('db')
+    
+  })
+
 
 module.exports = authRouter
