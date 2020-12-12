@@ -4,10 +4,9 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
-const validateBearerToken = require('./validate-bearer-token')
-const errorHandler = require('./error-handler')
+const validateBearerToken = require('./middleware/validate-bearer-token')
+const errorHandler = require('./middleware/error-handler')
 const usersRouter = require('./users/users-router')
-const authRouter = require('./auth/auth-router')
 
 const app = express();
 
@@ -21,10 +20,10 @@ app.use(validateBearerToken)
 
 // routers
 
-app.use('/api', usersRouter)
+app.use('/api/users', usersRouter)
 // app.use('/api/bootcamps', bootcampsRouter)
 // app.use('/api/userBootcamps', userBootcampsRouter)
-app.use('/api/auth', authRouter)
+// app.use('/api/auth', authRouter)
 
 app.use(errorHandler)
 
