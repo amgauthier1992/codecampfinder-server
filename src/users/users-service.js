@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 const UsersService = {
   createUser(knex, newUser){
     return knex
