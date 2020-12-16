@@ -5,7 +5,7 @@ CREATE TABLE payment_summaries (
   up_front SMALLMONEY,
   interest_only_loan TEXT,
   immediate_repayment_loan TEXT,
-  isa TEXT, --income sharing agreement "do they offer an ISA, yes/no (T/F)"
+  isa TEXT
 );
 
 --a course can have many payment options - One-to-many. 
