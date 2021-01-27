@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS bootcamp_locations;
+DROP TABLE IF EXISTS locations;

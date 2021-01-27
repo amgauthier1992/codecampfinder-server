@@ -4,3 +4,4 @@ CREATE TABLE users (
   last_name TEXT NOT NULL,
   password TEXT NOT NULL
 );
+

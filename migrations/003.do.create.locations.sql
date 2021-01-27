@@ -3,7 +3,3 @@ CREATE TABLE locations (
   city TEXT NOT NULL,
   state TEXT NOT NULL
 );
-
---bootcamps can have many locations. there can also be many bootcamps in one
---location. (many-to-many). Need to create another table and put a FK in bootcamps
---and another here that references this unique table? 

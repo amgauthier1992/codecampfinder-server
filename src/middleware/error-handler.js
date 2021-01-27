@@ -7,7 +7,7 @@ function errorHandler(error, req, res, next) {
     response = { error: { message: 'Server error' } };
   } else {
     logger.error(error.message)
-    response = { message: error.message, error };
+    response = { message: error.message, error, stack: error.stack };
   }
   res.status(500).json(response);
 }
