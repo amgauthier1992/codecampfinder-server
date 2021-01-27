@@ -5,49 +5,49 @@ const supertest = require('supertest');
 const app = require('../src/app')
 const { makeBootcampsArray } = require('./bootcamps.fixtures')
 
-describe(`Search Endpoint`, function() {
-  let db;
+// describe(`Search Endpoint`, function() {
+//   let db;
 
-  const cleanup = () => db.raw(
-    `TRUNCATE
-      course_languages,
-      languages,
-      payment_summaries,
-      course_schedules,
-      user_courses,
-      bootcamp_courses,
-      courses,
-      bootcamp_locations,
-      locations, 
-      bootcamps
-    RESTART IDENTITY CASCADE`
-  )
+//   const cleanup = () => db.raw(
+//     `TRUNCATE
+//       course_languages,
+//       languages,
+//       payment_summaries,
+//       course_schedules,
+//       user_courses,
+//       bootcamp_courses,
+//       courses,
+//       bootcamp_locations,
+//       locations, 
+//       bootcamps
+//     RESTART IDENTITY CASCADE`
+//   )
 
-  before('make knex instance', () => {
-    db = knex({
-      client: 'pg',
-      connection: process.env.TEST_DATABASE_URL,
-    })
-    app.set('db', db) 
-  })
+//   before('make knex instance', () => {
+//     db = knex({
+//       client: 'pg',
+//       connection: process.env.TEST_DATABASE_URL,
+//     })
+//     app.set('db', db) 
+//   })
 
-  after('disconnect from db', () => db.destroy())
+//   after('disconnect from db', () => db.destroy())
   
-  before('cleanup', () => cleanup())
+//   before('cleanup', () => cleanup())
   
-  afterEach('cleanup', () => cleanup())
+//   afterEach('cleanup', () => cleanup())
 
-  describe(`POST /api/search`, () => {
-    // context(`Given no folders`, () => {
-    //   it(`responds with 200 and an empty array`, () => {
-    //     return supertest(app)
-    //       .get('/folders')
-    //       .set('Authorization', 'Bearer ' + process.env.API_TOKEN)
-    //       .expect(200, [])
-    //   })
-  })
+//   describe(`POST /api/search`, () => {
+//     // context(`Given no folders`, () => {
+//     //   it(`responds with 200 and an empty array`, () => {
+//     //     return supertest(app)
+//     //       .get('/folders')
+//     //       .set('Authorization', 'Bearer ' + process.env.API_TOKEN)
+//     //       .expect(200, [])
+//     //   })
+//   })
 
-})
+// })
 
 // -- drop courses 
 // DROP TABLE course_languages;
