@@ -9,7 +9,7 @@ const UsersService = require('../repositories/users-repository');
 const BootcampService = require('../services/bootcamp-service');
 const CourseRepo = require('../repositories/courses-repository');
 const CourseService = require('../services/course-service');
-const UsersRepo = require('../repositories/users-repository');
+// const UsersRepo = require('../repositories/users-repository');
 const usersRouter = express.Router();
 const bodyParser = express.json();
 

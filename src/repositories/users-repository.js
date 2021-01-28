@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const coursesRepository = require('./courses-repository');
+// const coursesRepository = require('./courses-repository');
 
 module.exports = {
   createUser(knex, newUser){
