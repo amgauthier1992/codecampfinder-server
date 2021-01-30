@@ -4,12 +4,10 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../config');
 const logger = require('../middleware/logger');
 const validateJWT = require('../middleware/jwt-auth');
-// const UsersService = require('../services/users-service');
-const UsersService = require('../repositories/users-repository');
 const BootcampService = require('../services/bootcamp-service');
 const CourseRepo = require('../repositories/courses-repository');
 const CourseService = require('../services/course-service');
-// const UsersRepo = require('../repositories/users-repository');
+const UsersRepo = require('../repositories/users-repository');
 const usersRouter = express.Router();
 const bodyParser = express.json();
 
@@ -27,7 +25,7 @@ usersRouter
           error: `Missing '${key}' in request body`
         })
     
-    UsersService.getUserWithUsername(knexInstance, user_name)
+    UsersRepo.getUserWithUsername(knexInstance, user_name)
       .then(dbUser => {
         if (dbUser) {
           return res.status(400).json({ error: 'Username already exists.' }) 
@@ -37,11 +35,11 @@ usersRouter
           bcrypt.hash(password, saltRounds, function(err, hash) {
             if (err) {
               logger.error(err)
-              return res.status(400).send("Something went wrong.");
+              return res.status(400).send('Something went wrong.');
             }
             else {
               newUser.password = hash;
-              UsersService.createUser(knexInstance, newUser)
+              UsersRepo.createUser(knexInstance, newUser)
               .then(newUser => {
                 return res.status(201).json(newUser)
               })
@@ -65,18 +63,18 @@ usersRouter
           error: `Missing '${key}' in request body`
         })
 
-    UsersService.getUserWithUsername(knexInstance, loginUser.user_name)
+    UsersRepo.getUserWithUsername(knexInstance, loginUser.user_name)
       .then(dbUser => {
         if (!dbUser) {
           return res.status(400).json({ error: 'Incorrect user_name or password' }) 
         }
         else { 
-          UsersService.comparePasswords(loginUser.password, dbUser.password)
+          UsersRepo.comparePasswords(loginUser.password, dbUser.password)
             .then(match => {
               if (!match)
                 return res.status(400).json({ error: 'Incorrect user_name or password' })
               else {
-                UsersService.postLogin(knexInstance, user_name, dbUser.password)
+                UsersRepo.postLogin(knexInstance, user_name, dbUser.password)
                   const payload = {
                     user_name : loginUser.user_name,
                     first_name: dbUser.first_name,
@@ -84,7 +82,7 @@ usersRouter
                   }
                   jwt.sign(payload, JWT_SECRET, { expiresIn: '60m' }, function(err, token) {
                     if (err) {
-                      return res.status( 406 ).send( "Something went wrong" );
+                      return res.status( 406 ).send( 'Something went wrong' );
                     }
                     else {
                       return res.status( 202 ).json({ token } ) 
@@ -107,7 +105,7 @@ usersRouter
     const token = jwt.decode(req.headers.session_token)
     const knexInstance = req.app.get('db')
 
-    UsersService.getUserCourses(knexInstance, token.user_name)
+    UsersRepo.getUserCourses(knexInstance, token.user_name)
       .then(userCourses => {
         res.json(userCourses)
       })
@@ -121,7 +119,7 @@ usersRouter
         return res.status(400).json({
           error: `Missing '${key}' in request body`
         })
-
+      
       const bootcampName = req.body.Bootcamp
       const courseName = req.body.Course.Name
       const user_name = req.body.UserName
@@ -140,7 +138,7 @@ usersRouter
             .then(schedule => {
               userCourse.schedule_type = schedule.id
 
-              UsersService.addUserCourse(knexInstance, userCourse)
+              UsersRepo.addUserCourse(knexInstance, userCourse)
                 .then(course => {
                   return res.status(201).json(course)
                 })

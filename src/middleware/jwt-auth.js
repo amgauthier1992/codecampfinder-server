@@ -3,7 +3,6 @@ const { JWT_SECRET } = require('../config')
 const logger = require('./logger');
 
 function validateJWT(req, res, next) {
-  console.log(req)
   const { session_token } = req.headers; 
   jwt.verify(session_token, JWT_SECRET, function(err, decoded) {
     if(err){

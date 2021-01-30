@@ -1,5 +1,4 @@
 const express = require('express');
-const logger = require('../middleware/logger');
 const validateJWT = require('../middleware/jwt-auth');
 const SearchService = require('../services/search-service');
 const searchRouter = express.Router();
@@ -8,7 +7,6 @@ const bodyParser = express.json();
 searchRouter //responsibility is to hand off input to service to get results
   .route('/api/search')
   .post(validateJWT, bodyParser, (req,res,next) => {
-    // console.log(req.body)
     const { stateCode, is_online, prior_experience, schedule, fin_assist } = req.body
     const searchRequest = { stateCode, is_online, prior_experience, schedule, fin_assist }
     const knexInstance = req.app.get('db')

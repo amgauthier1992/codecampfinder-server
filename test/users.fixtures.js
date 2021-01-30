@@ -1,34 +1,24 @@
-const bcrypt = require('bcryptjs');
-
-// function encryptPassword(password){
-//   let saltRounds = 10;
-//   let newPassword = ''
-
-//   bcrypt.hash(password, saltRounds, function(err, hash){
-//     if (err) {
-//       logger.error(err)
-//     }
-//     else {
-//       password = hash;
-//       newPassword = password;
-//     }
-//   })
-
-//   return newPassword;
-// }
-
-function getHash(err, hash){
-  let encrypted = ''
-  if (err) {
-    logger.error(err)
+function createLoginUser() {
+  return {
+    first_name: 'John',
+    last_name: 'Smith',
+    user_name: 'JSmith123',
+    password: 'Abc1234!'
   }
-  else {
-    encrypted = hash;
+};
+
+function createCourseObject(){
+  return {
+    Bootcamp: 'App Academy',
+    Course: {
+      Name: '24 Week Software Engineering Immersive',
+      Schedule: { Type: 'full_time', Hours: 60, Duration: 24 }
+    },
+    UserName: 'JSmith123'
   }
-  return encrypted;
-}
+};
 
 module.exports = {
-//   encryptPassword,
-  getHash
-}
+  createLoginUser,
+  createCourseObject
+};
