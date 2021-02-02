@@ -159,7 +159,6 @@ usersRouter
       .then(info => {
         return res.json(info)
       })
-    // res.json(res.course)   
   })
 
   .delete(validateJWT, (req, res, next) => {
@@ -184,17 +183,6 @@ usersRouter
           })
       })
 
-    // UsersRepo.deleteUserCourse(knexInstance, course_id, token.user_name, schedule_id)
-    //   .then(numRowsAffected => {
-    //     if(numRowsAffected !== 1) {
-    //       logger.error(`Course with id ${course_id} not found.`)
-    //       return res.status(404).json({
-    //         error: { message: `Course Not Found.`}
-    //       })
-    //     }
-    //     logger.info(`Course with id ${course_id} deleted.`)
-    //     res.status(204).end() 
-    // })
       .catch(next)
   })
 

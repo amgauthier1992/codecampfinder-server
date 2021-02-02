@@ -14,7 +14,6 @@ module.exports = {
 
           for (let i = 0; i < data.length; i++){
             let row = data[i];
-            // console.log(row)
 
             results.push({  
               CourseId: row.Course_id,

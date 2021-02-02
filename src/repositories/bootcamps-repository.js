@@ -44,5 +44,3 @@ module.exports = {
       .first()
   }
 }
-
-//we define what columns we want to expose here. The service structures the data.

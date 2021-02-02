@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-// const coursesRepository = require('./courses-repository');
 
 module.exports = {
   createUser(knex, newUser){
@@ -87,9 +86,6 @@ module.exports = {
       .innerJoin('courses as c', 'c.id', '=', 'cl.course_id')
       .where('c.id', course_id)
   },
-//   getUserCourseById(knex, course_id, scheduleType){
-//     return knex('bootcamp_courses as bc')
-//   },
   deleteUserCourse(knex, course_id, user_name, schedule_type){
     return knex('user_courses as uc')
       .where({ course_id })
@@ -98,10 +94,3 @@ module.exports = {
       .delete()
   }
 }
-
-// select p.*
-// from 
-// 	courses c
-// inner join payment_summaries p on
-// 	c.id = p.course_id 
-// where c.id = 1

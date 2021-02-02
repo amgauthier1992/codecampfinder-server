@@ -17,8 +17,6 @@ module.exports = {  //building a promise and returning results
         for (let i = 0; i < bootcampsAndCourses.length; i++){
           let bootcampRow = bootcampsAndCourses[i];
           
-          console.log(`Processing Bootcamp: [${bootcampRow.BootcampId} - ${bootcampRow.Name}]`)
-          console.group()
           //using .find() on locations to return 1st object where name (x.Bootcamp) 
           //matches the bootcampRow (data[i].Name)
           let bootcampLocations = locations.find(location => location.BootcampId == bootcampRow.BootcampId);
@@ -34,8 +32,6 @@ module.exports = {  //building a promise and returning results
           if (bootcampLocations){
             bootcamp.Locations = bootcampLocations.Locations;
           } else {
-            console.log(`Skipping bootcamp [${bootcampRow.BootcampId} - ${bootcampRow.Name}]: no locations`)
-            console.groupEnd()
             continue;
           }
 
@@ -44,7 +40,6 @@ module.exports = {  //building a promise and returning results
             let courseSchedule = schedules.find(schedule => schedule.CourseId == courseRow.CourseId)
             let coursePaymentSummary = payment_summaries.find(summary => summary.CourseId == courseRow.CourseId)
             let courseLanguages = languages.find(language => language.CourseId == courseRow.CourseId)
-            console.group()
 
             let course = {
               Name: courseRow.Name,
@@ -61,8 +56,6 @@ module.exports = {  //building a promise and returning results
             if(courseSchedule){
               course.Schedule = courseSchedule.Schedule;
             } else { //skip this course
-              console.log(`Skipping course [${courseRow.CourseId} - ${courseRow.Name}]: no schedules`)
-              console.groupEnd()
               continue;
             }
 
@@ -70,8 +63,6 @@ module.exports = {  //building a promise and returning results
             if(coursePaymentSummary){
               course.PaymentSummary = coursePaymentSummary.PaymentSummary;
             } else {
-              console.log(`Skipping course [${courseRow.CourseId} - ${courseRow.Name}]: no payment summaries`)
-              console.groupEnd()
               continue;
             }
 
@@ -81,26 +72,19 @@ module.exports = {  //building a promise and returning results
                 course.Languages.push(la)
               )
             } else {
-              console.log(`Skipping course [${courseRow.CourseId} - ${courseRow.Name}]: no languages`)
-              console.groupEnd()
               continue;
             }
 
             bootcamp.Courses.push(course)
-            console.groupEnd()
           }
 
           //if we have no courses, skip over the bootcamp entirely
           if(bootcamp.Courses.length == 0){
-            console.log(`Skipping bootcamp [${bootcamp.Name}]: no courses`)
-            console.groupEnd()
             continue;
           }
 
           //add our bootcamps results to the array
           bootcamps.push(bootcamp);
-          console.log(`Adding course to bootcamp`)
-          console.groupEnd()
         }
         
         return bootcamps
