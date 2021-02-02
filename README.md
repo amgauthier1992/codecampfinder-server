@@ -10,7 +10,7 @@ The front end client can be found at [https://github.com/amgauthier1992/codecamp
 
 With coding bootcamps on the rise as a potential alternative to break into tech, and with so many options for prospective students looking to delve into an exciting new career, it's hard to decide which institution aligns best with your values and will actually help you achieve your goals. This application was designed to serve as a tool to assist and streamline the process of exploring some of the nation's most popular coding bootcamps and their available courses.
 
-Disclaimer - Information regarding bootcamps and courses, especially information surrounding financing and tuition figures are constantly fluid and changing. We try our best to keep all of this information up-to-date, but for the most accurate information, you will want to visit a bootcamp's website via the app directly.
+_Disclaimer_ - Information regarding bootcamps and courses, especially information surrounding financing and tuition figures are constantly fluid and changing. We try our best to keep all of this information up-to-date, but for the most accurate information, you will want to visit a bootcamp's website via the app directly.
 
 ## Future Developments
 

@@ -1,5 +1,5 @@
-const BootcampService = require('./bootcamp-service')
-const CourseService = require('./course-service')
+const BootcampService = require('./bootcamp-service');
+const CourseService = require('./course-service');
 
 module.exports = {  //building a promise and returning results
   getResults(knex, searchRequest){
